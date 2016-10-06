@@ -16,19 +16,21 @@ public class CollectionInfractionImpl extends CollectionInfractionPOA{
 	public Infraction getInfraction(int index) {
 		try {
 			InfractionImpl infraction = _infractionList.get(index);
-			
-			/*POA rootpoa = Server._poa;
-			org.omg.CORBA.Object obj = rootpoa.servant_to_reference(infraction);*/
-
-			return InfractionHelper.narrow(null);
+			POA rootpoa = Server._infractionPOA;
+			org.omg.CORBA.Object obj = rootpoa.servant_to_reference(infraction);
+			return InfractionHelper.narrow(obj);
 		} catch(Exception e) {
-			System.out.println("Erreur retour de l'objet Cours : " + e);
+			System.out.println("Erreur retour de l'objet infraction : " + e);
 			return null;
 		}
 	}
 
 	public int size() {
 		return _infractionList.size();
+	}
+	
+	public ArrayList<InfractionImpl> InfractionList() {
+		return _infractionList;
 	}
 
 }
