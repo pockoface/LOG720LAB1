@@ -1,5 +1,6 @@
+import java.util.Hashtable;
+
 import org.omg.PortableServer.POA;
-import org.omg.PortableServer.Servant;
 
 import ca.etsmtl.log720.lab1.BanqueDossiersPOA;
 import ca.etsmtl.log720.lab1.CollectionDossier;
@@ -11,30 +12,35 @@ import ca.etsmtl.log720.lab1.NoPermisExisteDejaException;
 
 public class BanqueDossiersImpl extends BanqueDossiersPOA {
 	private CollectionDossierImpl _collectionDossierImpl;
+	private Hashtable<String,String> _plaqueList;
 
 	public BanqueDossiersImpl() {
 		_collectionDossierImpl = new CollectionDossierImpl();
+		_plaqueList = new Hashtable<String,String>();
 	}
 
-
 	public void ajouterDossier(String nom, String prenom, String permis, String noPlaque) throws NoPermisExisteDejaException {
-		// TODO Auto-generated method stub
-		
+		if(_plaqueList.containsKey(noPlaque)){
+			throw new NoPermisExisteDejaException();
+		}
+		_collectionDossierImpl.collectionDossier().add(new DossierImpl(_collectionDossierImpl.size(), 0, nom, prenom, permis, noPlaque));
 	}
 
 	public void ajouterInfractionAuDossier(int idDossier, int idInfration) throws InvalidIdException {
-		// TODO Auto-generated method stub
-		
+		dossiers().getDossier(idDossier).ajouterInfractionAListe(idInfration);
 	}
 
 	public void ajouterReactionAuDossier(int idDossier, int idReaction) throws InvalidIdException {
-		// TODO Auto-generated method stub
+		dossiers().getDossier(idDossier).ajouterReactionAListe(idReaction);
 		
 	}
 
 	public CollectionDossier dossiers() {
 		try {
-			return null;
+			POA rootpoa = Server._DossierPOA;
+			org.omg.CORBA.Object obj = rootpoa
+					.servant_to_reference(_collectionDossierImpl);
+			return CollectionDossierHelper.narrow(obj);
 		} catch (Exception e) {
 			System.out.println("Erreur retour de l'objet CollectionDossier : " + e);
 			return null;

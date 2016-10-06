@@ -1,4 +1,6 @@
 import org.omg.PortableServer.POA;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import ca.etsmtl.log720.lab1.BanqueInfractionsPOA;
 import ca.etsmtl.log720.lab1.CollectionInfraction;
@@ -12,11 +14,11 @@ import ca.etsmtl.log720.lab1.NiveauHorsBornesException;
 public class BanqueInfractionsImpl extends BanqueInfractionsPOA{
 
 	private CollectionInfractionImpl _collectionInfraction;
-	
+
 	public BanqueInfractionsImpl() {
 		_collectionInfraction = new CollectionInfractionImpl();
 	}
-	
+
 	public void ajouterInfraction(String description, int niveau)
 			throws NiveauHorsBornesException {
 		InfractionImpl infraction = new InfractionImpl(description,_collectionInfraction.size(), niveau);
@@ -33,7 +35,7 @@ public class BanqueInfractionsImpl extends BanqueInfractionsPOA{
 			System.out.println("Erreur retour de l'objet CollectionInfraction : " + e);
 			return null;
 		}
-		
+
 	}
 
 	public Infraction trouverInfractionParId(int idInfraction) {
@@ -45,11 +47,22 @@ public class BanqueInfractionsImpl extends BanqueInfractionsPOA{
 		}
 	}
 
-	/**
-	 * TODO
-	 */
 	public CollectionInfraction trouverInfractionsParDossier(Dossier mydossier) {
-		return null;
+		try {
+			CollectionInfractionImpl infractions = new CollectionInfractionImpl();
+			for(Integer idInfraction: mydossier.getListeInfraction()) {
+				infractions.InfractionList().add(_collectionInfraction.InfractionList().get(idInfraction));
+			}
+			POA rootpoa = Server._infractionPOA;
+			org.omg.CORBA.Object obj;
+
+			obj = rootpoa
+					.servant_to_reference(infractions);
+			return CollectionInfractionHelper.narrow(obj);
+		} catch (Exception e) {
+			System.out.println("Erreur retour de l'objet CollectionInfraction : " + e);
+			return null;
+		} 
 	}
 
 }
