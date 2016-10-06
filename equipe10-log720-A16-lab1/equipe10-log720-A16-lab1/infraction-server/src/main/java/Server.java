@@ -24,7 +24,7 @@ public class Server {
 			NamingContextExt nc = NamingContextExtHelper.narrow(orb
 					.resolve_initial_references("NameService"));
 			NameComponent[] name = new NameComponent[] { new NameComponent(
-					"Police", "service") };
+					"Infraction", "service") };
 			nc.rebind(name, o);
 		} catch (Exception e) {
 			e.printStackTrace();
