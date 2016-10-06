@@ -1,15 +1,45 @@
 import java.util.Scanner;
 
+import org.omg.CosNaming.NameComponent;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+
+import ca.etsmtl.log720.lab1.BanqueDossiers;
+import ca.etsmtl.log720.lab1.BanqueDossiersHelper;
+import ca.etsmtl.log720.lab1.BanqueInfractions;
+import ca.etsmtl.log720.lab1.BanqueInfractionsHelper;
+
 public class PosteClient {
 	public static String selectedFileRecord = "";
 	public static int selectedMainMenuItem = 0;
 	public static Scanner enteredValue = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		System.out.println("Client du poste: ");
-		displayMainMenu();
-		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1, 2, 3 ou 4)");
-		mainMenu();	
+		try{
+			org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(args, null);
+
+			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+					.resolve_initial_references("NameService"));
+
+			NameComponent[] dossierServer = new NameComponent[] { new NameComponent(
+					"Dossier", "service") };
+			
+			NameComponent[] infractionServer = new NameComponent[] { new NameComponent(
+					"Infraction", "service") };
+			
+			BanqueDossiers dossier = BanqueDossiersHelper
+					.narrow(nc.resolve(dossierServer));
+			
+			BanqueInfractions infraction = BanqueInfractionsHelper
+					.narrow(nc.resolve(infractionServer));
+			
+			System.out.println("Client du poste: ");
+			displayMainMenu();
+			System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1, 2, 3 ou 4)");
+			mainMenu();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static void displayMainMenu(){
