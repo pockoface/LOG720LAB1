@@ -19,10 +19,20 @@ public class DossierImpl extends DossierPOA{
 	private ArrayList<Integer> _infractions;
 	private ArrayList<Integer> _reactions;
 
+	public DossierImpl(int _id, int _niveau, String _nom, String _prenom, String _noPermis, String _noPlaque) {
+		super();
+		this._id = _id;
+		this._niveau = _niveau;
+		this._nom = _nom;
+		this._prenom = _prenom;
+		this._noPermis = _noPermis;
+		this._noPlaque = _noPlaque;
+	}	
+	
 	public String _toString() {
 		return "id: " + _id + " niveau: " + _niveau + " nom: " + _nom + " prenom: " + _prenom + " noPermis: " + _noPermis + " noPlaque: " + _noPlaque;
 	}
-
+		
 	public void ajouterInfractionAListe(int idInfraction) {
 		System.out.println("Infraction id: " + idInfraction + " au dossier " + _id );
 		_infractions.add(idInfraction);
@@ -30,7 +40,7 @@ public class DossierImpl extends DossierPOA{
 	}
 
 	private void evaluateFolderLevel() {
-		int level = Integer.MIN_VALUE;
+		_niveau = Integer.MIN_VALUE;
 		try{
 			org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
 			NamingContextExt nc = NamingContextExtHelper.narrow(orb
@@ -38,9 +48,11 @@ public class DossierImpl extends DossierPOA{
 			NameComponent[] name = new NameComponent[] { new NameComponent(
 					"Infraction", "service") };
 			BanqueInfractions binfraction = BanqueInfractionsHelper.narrow(nc.resolve(name));
-			/**
-			 * TODO
-			 */
+			for(Integer _level: _infractions){
+				if(_level > _niveau){
+					_niveau = _level;
+				}
+			}
 		} catch (Exception e) {
 			System.out.println("Erreur retour de l'objet BanqieInfractions : " + e);
 		}
