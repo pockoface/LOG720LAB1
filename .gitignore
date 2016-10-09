@@ -10,3 +10,8 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.properties
+*.properties
+*.properties
+*.properties
+/equipe10-log720-A16-lab1/equipe10-log720-A16-lab1/infraction-server/target/maven-archiver/*.properties
