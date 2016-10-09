@@ -1,7 +1,9 @@
 package reaction;
+import java.io.Serializable;
+
 import ca.etsmtl.log720.lab1.ReactionPOA;
 
-public class ReactionImpl extends ReactionPOA{
+public class ReactionImpl extends ReactionPOA implements Serializable{
 	
 	private int _id;
 	private int _niveau;

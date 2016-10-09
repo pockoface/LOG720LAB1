@@ -1,4 +1,5 @@
 package dossier;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.omg.CosNaming.NameComponent;
@@ -9,7 +10,7 @@ import ca.etsmtl.log720.lab1.BanqueInfractions;
 import ca.etsmtl.log720.lab1.BanqueInfractionsHelper;
 import ca.etsmtl.log720.lab1.DossierPOA;
 
-public class DossierImpl extends DossierPOA{
+public class DossierImpl extends DossierPOA implements Serializable{
 	
 	private int _id;
 	private int _niveau;

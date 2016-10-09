@@ -39,8 +39,7 @@ public class Server {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Start the ORB main thread
-		orb.run();
+
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
@@ -48,13 +47,16 @@ public class Server {
 					ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
 					out.writeObject(servant);
 					out.close();
-					System.out.println("Instance de BanqueReactionsImpl non sauvegarder");
+					System.out.println("Instance de BanqueReactionsImpl sauvegarder");
 				} catch (Exception e) {
 					System.out.println("[ERREUR]Instance de BanqueReactionsImpl non sauvegarder");
 				}
 				 
 			}
 		});
+		
+		// Start the ORB main thread
+		orb.run();
 	}
 	
 	private static BanqueReactionsImpl load(){

@@ -1,4 +1,5 @@
 package dossier;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.omg.PortableServer.POA;
@@ -7,7 +8,7 @@ import ca.etsmtl.log720.lab1.CollectionDossierPOA;
 import ca.etsmtl.log720.lab1.Dossier;
 import ca.etsmtl.log720.lab1.DossierHelper;
 
-public class CollectionDossierImpl extends CollectionDossierPOA{
+public class CollectionDossierImpl extends CollectionDossierPOA implements Serializable{
 	
 	private ArrayList<DossierImpl> dossierList;
 	

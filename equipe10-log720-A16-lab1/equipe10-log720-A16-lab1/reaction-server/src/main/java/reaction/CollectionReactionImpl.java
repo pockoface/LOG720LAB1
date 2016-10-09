@@ -1,4 +1,5 @@
 package reaction;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.omg.PortableServer.POA;
@@ -7,7 +8,7 @@ import ca.etsmtl.log720.lab1.CollectionReactionPOA;
 import ca.etsmtl.log720.lab1.Reaction;
 import ca.etsmtl.log720.lab1.ReactionHelper;
 
-public class CollectionReactionImpl extends CollectionReactionPOA{
+public class CollectionReactionImpl extends CollectionReactionPOA implements Serializable{
 	
 	private ArrayList<ReactionImpl> reactionList;
 	

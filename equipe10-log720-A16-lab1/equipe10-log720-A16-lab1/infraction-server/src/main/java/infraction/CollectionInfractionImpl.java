@@ -1,12 +1,14 @@
 package infraction;
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.omg.PortableServer.POA;
 
 import ca.etsmtl.log720.lab1.CollectionInfractionPOA;
 import ca.etsmtl.log720.lab1.Infraction;
-import ca.etsmtl.log720.lab1.InfractionHelper;
-import org.omg.PortableServer.POA;;
+import ca.etsmtl.log720.lab1.InfractionHelper;;
 
-public class CollectionInfractionImpl extends CollectionInfractionPOA{
+public class CollectionInfractionImpl extends CollectionInfractionPOA implements Serializable{
 	
 	private ArrayList<InfractionImpl> _infractionList;
 	

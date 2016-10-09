@@ -1,7 +1,9 @@
 package infraction;
+import java.io.Serializable;
+
 import ca.etsmtl.log720.lab1.InfractionPOA;
 
-public class InfractionImpl extends InfractionPOA{
+public class InfractionImpl extends InfractionPOA implements Serializable{
 
 	private String _description;
 	private int _id;

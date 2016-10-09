@@ -11,12 +11,11 @@ import org.omg.CosNaming.NamingContextExtHelper;
 public class Server {
 	protected static org.omg.PortableServer.POA _DossierPOA;
 	private final static String FILE_NAME = "dossier.sab";
-	private static 	org.omg.PortableServer.Servant servant;
+	protected static org.omg.PortableServer.Servant servant;
 
 	public static void main(String[] args) {
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(args, null);
 		try {
-			org.omg.PortableServer.Servant servant;
 			org.omg.CORBA.Object o;
 
 			// Initialize POA
