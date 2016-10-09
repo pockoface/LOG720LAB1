@@ -1,3 +1,4 @@
+package infraction;
 import ca.etsmtl.log720.lab1.InfractionPOA;
 
 public class InfractionImpl extends InfractionPOA{

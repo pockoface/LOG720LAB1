@@ -1,3 +1,4 @@
+package reaction;
 import ca.etsmtl.log720.lab1.ReactionPOA;
 
 public class ReactionImpl extends ReactionPOA{

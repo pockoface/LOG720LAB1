@@ -1,3 +1,4 @@
+package dossier;
 import java.util.ArrayList;
 
 import org.omg.CosNaming.NameComponent;
@@ -48,9 +49,10 @@ public class DossierImpl extends DossierPOA{
 			NameComponent[] name = new NameComponent[] { new NameComponent(
 					"Infraction", "service") };
 			BanqueInfractions binfraction = BanqueInfractionsHelper.narrow(nc.resolve(name));
-			for(Integer _level: _infractions){
-				if(_level > _niveau){
-					_niveau = _level;
+			
+			for(Integer _infractionId: _infractions){
+				if(binfraction.trouverInfractionParId(_infractionId).niveau() > _niveau){
+					_niveau = binfraction.trouverInfractionParId(_infractionId).niveau();
 				}
 			}
 		} catch (Exception e) {

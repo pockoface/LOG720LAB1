@@ -1,17 +1,17 @@
+package infraction;
+import java.io.Serializable;
+
 import org.omg.PortableServer.POA;
-import org.omg.PortableServer.POAPackage.ServantNotActive;
-import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import ca.etsmtl.log720.lab1.BanqueInfractionsPOA;
 import ca.etsmtl.log720.lab1.CollectionInfraction;
 import ca.etsmtl.log720.lab1.CollectionInfractionHelper;
 import ca.etsmtl.log720.lab1.Dossier;
 import ca.etsmtl.log720.lab1.Infraction;
-import ca.etsmtl.log720.lab1.InfractionHelper;
 import ca.etsmtl.log720.lab1.NiveauHorsBornesException;
 
 
-public class BanqueInfractionsImpl extends BanqueInfractionsPOA{
+public class BanqueInfractionsImpl extends BanqueInfractionsPOA implements Serializable{
 
 	private CollectionInfractionImpl _collectionInfraction;
 

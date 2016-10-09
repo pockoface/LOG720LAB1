@@ -1,3 +1,5 @@
+package dossier;
+import java.io.Serializable;
 import java.util.Hashtable;
 
 import org.omg.PortableServer.POA;
@@ -10,7 +12,7 @@ import ca.etsmtl.log720.lab1.DossierHelper;
 import ca.etsmtl.log720.lab1.InvalidIdException;
 import ca.etsmtl.log720.lab1.NoPermisExisteDejaException;
 
-public class BanqueDossiersImpl extends BanqueDossiersPOA {
+public class BanqueDossiersImpl extends BanqueDossiersPOA implements Serializable{
 	private CollectionDossierImpl _collectionDossierImpl;
 	private Hashtable<String,String> _plaqueList;
 
