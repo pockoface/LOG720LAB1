@@ -10,13 +10,23 @@ import ca.etsmtl.log720.lab1.BanqueInfractions;
 import ca.etsmtl.log720.lab1.BanqueInfractionsHelper;
 import ca.etsmtl.log720.lab1.BanqueReactions;
 import ca.etsmtl.log720.lab1.BanqueReactionsHelper;
+import ca.etsmtl.log720.lab1.CollectionDossier;
+import ca.etsmtl.log720.lab1.CollectionInfraction;
+import ca.etsmtl.log720.lab1.CollectionReaction;
+import ca.etsmtl.log720.lab1.Dossier;
+import ca.etsmtl.log720.lab1.Infraction;
+import ca.etsmtl.log720.lab1.Reaction;
 
 public class VehiculeClient {
 	
-	public static String selectedFileRecord = "";
+	public static String selectedStringValue = "";
 	public static int selectedManager = 0;
-	public static int selectedItem = 0;
+	public static int selectedIntegerValue = 0;
 	public static Scanner enteredValue = new Scanner(System.in);
+	
+	public static BanqueDossiers dossier;
+	public static BanqueReactions reaction;
+	public static BanqueInfractions infraction;
 
 	public static void main(String[] args) {
 		try {
@@ -34,13 +44,13 @@ public class VehiculeClient {
 			NameComponent[] infractionServer = new NameComponent[] { new NameComponent(
 					"Infraction", "service") };
 			
-			BanqueDossiers dossier = BanqueDossiersHelper
+			dossier = BanqueDossiersHelper
 					.narrow(nc.resolve(dossierServer));
 			
-			BanqueReactions reaction = BanqueReactionsHelper
+			reaction = BanqueReactionsHelper
 					.narrow(nc.resolve(reactionServer));
 			
-			BanqueInfractions infraction = BanqueInfractionsHelper
+			infraction = BanqueInfractionsHelper
 					.narrow(nc.resolve(infractionServer));
 			
 			System.out.println("Client du véhicule: ");
@@ -106,15 +116,15 @@ public class VehiculeClient {
 	
 	private static void filesMenu(){
 		
-		selectedItem = integerSelector();
+		selectedIntegerValue = integerSelector();
 		
-		while(selectedItem != 1 && selectedItem != 2 && selectedItem != 3 && selectedItem != 4){
+		while(selectedIntegerValue != 1 && selectedIntegerValue != 2 && selectedIntegerValue != 3 && selectedIntegerValue != 4){
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayFilesMenu();
-			selectedItem = integerSelector();	
+			selectedIntegerValue = integerSelector();	
 		}
 		
-		switch(selectedItem){
+		switch(selectedIntegerValue){
 		case 1:
 			listFilesFunction();
 			break;
@@ -130,25 +140,109 @@ public class VehiculeClient {
 		default:
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayFilesMenu();
-			selectedItem = integerSelector();
+			selectedIntegerValue = integerSelector();
 			break;
 		}
 	}
 	
 	private static void listFilesFunction(){
 		System.out.println("LIST FILES");
+		 printFilesList();
 	}
 	
 	private static void listFilesByNameFunction(){
 		System.out.println("LIST FILES BY NAME AND LAST NAME");
+		
+		String lastName = returnLastName();
+		String firstName = returnFirstName();
+		
+		System.out.println("Prénom = " + firstName + " ||| Nom de famille = " + lastName);
+		//dossier.trouverDossiersParNom(lastName, firstName);
+		 printFilesList();
+	}
+	
+	private static String returnLastName(){
+		System.out.println("Veuillez entrer le nom de famille:");
+		String lastName;
+		
+		selectedStringValue = "";
+		selectedStringValue = stringSelector();
+		while(selectedStringValue == ""){
+			System.out.println("Entrée invalide!");
+			returnLastName();
+		}
+		
+		lastName = selectedStringValue;
+		
+		return lastName;
+	}
+	
+	private static String returnFirstName(){
+		System.out.println("Veuillez entrer le prénom:");
+		String firstName;
+		
+		selectedStringValue = "";
+		selectedStringValue = stringSelector();
+		while(selectedStringValue == ""){
+			System.out.println("Entrée invalide!");
+			returnFirstName();
+		}
+		
+		firstName = selectedStringValue;
+		
+		return firstName;
 	}
 	
 	private static void listFilesByPlateFunction(){
 		System.out.println("LIST FILES BY PLATE");
+		
+		String carPlate = returnCarPlate();
+		
+		System.out.println("Plaque de la voiture = " + carPlate);
+		//dossier.trouverDossiersParPlaque(carPlate);
+		 printFilesList();
+	}
+	
+	private static String returnCarPlate(){
+		System.out.println("Veuillez entrer la plaque de la voiture:");
+		String carPlate;
+		
+		selectedStringValue = "";
+		selectedStringValue = stringSelector();
+		while(selectedStringValue == ""){
+			System.out.println("Entrée invalide!");
+			returnCarPlate();
+		}
+		
+		carPlate = selectedStringValue;
+		
+		return carPlate;
 	}
 	
 	private static void listFilesByLicenseFunction(){
 		System.out.println("LIST FILES BY LICENSE");
+		
+		String driverLicenseNumber = returnDriverLicense();
+		
+		System.out.println("Numéro du permis = " + driverLicenseNumber);
+		//dossier.trouverDossierParPermis(driverLicenseNumber);
+		printFilesList();
+	}
+	
+	private static String returnDriverLicense(){
+		System.out.println("Veuillez entrer le numéros du permis:");
+		String driverLicenseNumber;
+		
+		selectedStringValue = "";
+		selectedStringValue = stringSelector();
+		while(selectedStringValue == ""){
+			System.out.println("Entrée invalide!");
+			returnDriverLicense();
+		}
+		
+		driverLicenseNumber = selectedStringValue;
+		
+		return driverLicenseNumber;
 	}
 	/***********************************************************************************************/
 	
@@ -158,21 +252,21 @@ public class VehiculeClient {
 		System.out.println("Gestionnaire des réactions");
 		System.out.println("1 - Liste des réactions");
 		System.out.println("2 - Ajouter une réaction à un dossier");
-		System.out.println("3 - Ajouter une ou plusieurs réactions à la liste des réactions");
+		System.out.println("3 - Ajouter une réaction à la liste des réactions");
 		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1, 2 ou 3)");
 	}
 	
 	private static void reactionsMenu(){
 		
-		selectedItem = integerSelector();
+		selectedIntegerValue = integerSelector();
 		
-		while(selectedItem != 1 && selectedItem != 2 && selectedItem != 3){
+		while(selectedIntegerValue != 1 && selectedIntegerValue != 2 && selectedIntegerValue != 3){
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayReactionsMenu();
-			selectedItem = integerSelector();	
+			selectedIntegerValue = integerSelector();	
 		}
 		
-		switch(selectedItem){
+		switch(selectedIntegerValue){
 		case 1:
 			listReactionsFunction();
 			break;
@@ -185,21 +279,100 @@ public class VehiculeClient {
 		default:
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayReactionsMenu();
-			selectedItem = integerSelector();
+			selectedIntegerValue = integerSelector();
 			break;
 		}
 	}
 	
 	private static void listReactionsFunction(){
 		System.out.println("LIST REACTIONS");
+		printReactionsList();
 	}
 	
 	private static void addReactionToFileFunction(){
 		System.out.println("ADD A REACTION TO A FILE");
+
+		int idFile = returnFileID();
+		int idReaction = returnReactionID();
+		
+		System.out.println("Numéro d'identification du dossier = " + idFile + " ||| Numéro d'identification de la réaction = " + idReaction);
+		//dossier.ajouterReactionAuDossier(idFile, idReaction);
+		printReactionsList();
+	}
+	
+	private static int returnFileID(){
+		System.out.println("Veuillez entrer le numéro d'identification du dossier:");
+		int idFile;
+		
+		selectedIntegerValue = 0;
+		selectedIntegerValue = integerSelector();
+		while(selectedIntegerValue == 0){
+			System.out.println("Entrée invalide!");
+			returnFileID();
+		}
+		
+		idFile = selectedIntegerValue;
+		
+		return idFile;
+	}
+	
+	private static int returnReactionID(){
+		System.out.println("Veuillez entrer le numéro d'identification de la réaction:");
+		int idReaction;
+		
+		selectedIntegerValue = 0;
+		selectedIntegerValue = integerSelector();
+		while(selectedIntegerValue == 0){
+			System.out.println("Entrée invalide!");
+			returnReactionID();
+		}
+		
+		idReaction = selectedIntegerValue;
+		
+		return idReaction;
 	}
 	
 	private static void addReactionToReactionsListFunction(){
 		System.out.println("ADD REACTIONS TO REACTIONS LIST");
+		
+		String reactionName = returnReactionName();
+		int reactionGravity = returnReactionGravity();
+		
+		System.out.println("Nom de réaction = " + reactionName + " ||| Gravité de la réaction = " + reactionGravity);
+		//reaction.ajouterReaction(reactionName, reactionGravity);
+		printReactionsList();
+	}
+	
+	private static String returnReactionName(){
+		System.out.println("Veuillez entrer le nom de la réaction:");
+		String reactionName;
+		
+		selectedStringValue = "";
+		selectedStringValue = stringSelector();
+		while(selectedStringValue == ""){
+			System.out.println("Entrée invalide!");
+			returnReactionName();
+		}
+		
+		reactionName = selectedStringValue;
+		
+		return reactionName;
+	}
+	
+	private static int returnReactionGravity(){
+		System.out.println("Veuillez entrer la gravité de la réaction:");
+		int reactionGravity;
+		
+		selectedIntegerValue = 0;
+		selectedIntegerValue = integerSelector();
+		while(selectedIntegerValue == 0){
+			System.out.println("Entrée invalide!");
+			returnReactionGravity();
+		}
+		
+		reactionGravity = selectedIntegerValue;
+		
+		return reactionGravity;
 	}
 	/***********************************************************************************************/
 	
@@ -214,15 +387,15 @@ public class VehiculeClient {
 	
 	private static void infractionsMenu(){
 		
-		selectedItem = integerSelector();
+		selectedIntegerValue = integerSelector();
 		
-		while(selectedItem != 1 && selectedItem != 2){
+		while(selectedIntegerValue != 1 && selectedIntegerValue != 2){
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayInfractionsMenu();
-			selectedItem = integerSelector();	
+			selectedIntegerValue = integerSelector();	
 		}
 		
-		switch(selectedItem){
+		switch(selectedIntegerValue){
 		case 1:
 			listInfractionsFunction();
 			break;
@@ -232,17 +405,41 @@ public class VehiculeClient {
 		default:
 			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
 			displayInfractionsMenu();
-			selectedItem = integerSelector();
+			selectedIntegerValue = integerSelector();
 			break;
 		}
 	}
 	
 	private static void listInfractionsFunction(){
 		System.out.println("LIST INFRACTIONS");
+		printInfractionList();
 	}
 	
 	private static void addInfractionsToFileFunction(){
 		System.out.println("ADD INFRACTION TO A FILE");
+		
+		int idFile = returnFileID();
+		int idInfraction = returnInfractionID();
+		
+		System.out.println("Numéro d'identification du dossier = " + idFile + " ||| Numéro d'identification de l'infraction = " + idInfraction);
+		//dossier.ajouterInfractionAuDossier(idFile, idInfraction);
+		printInfractionList();
+	}
+	
+	private static int returnInfractionID(){
+		System.out.println("Veuillez entrer le numéro d'identification de l'infraction:");
+		int idInfraction;
+		
+		selectedIntegerValue = 0;
+		selectedIntegerValue = integerSelector();
+		while(selectedIntegerValue == 0){
+			System.out.println("Entrée invalide!");
+			returnInfractionID();
+		}
+		
+		idInfraction = selectedIntegerValue;
+		
+		return idInfraction;
 	}
 	/***********************************************************************************************/
 	private static int integerSelector(){
@@ -254,12 +451,36 @@ public class VehiculeClient {
 		}
 	}
 	
-	private static String stringItemSelector(){
+	private static String stringSelector(){
 		try{
 			String returnValue = enteredValue.next().toString();
 			return returnValue;
 		}catch(Exception e){
-			return "";	
+			return "failed";	
+		}
+	}
+	
+	private static void printFilesList(){
+		CollectionDossier cdos = dossier.dossiers();
+		for(int i = 0; i < cdos.size(); i++){
+			Dossier dos = cdos.getDossier(i);
+			System.out.println(dos.toString());	
+		}
+	}
+	
+	private static void printReactionsList(){
+		CollectionReaction creact = reaction.reactions();
+		for(int i = 0; i < creact.size(); i++){
+			Reaction react = creact.getReaction(i);
+			System.out.println(react.toString());	
+		}
+	}
+	
+	private static void printInfractionList(){
+		CollectionInfraction cinfra = infraction.infractions();
+		for(int i = 0; i < cinfra.size(); i++){
+			Infraction inf = cinfra.getInfraction(i);
+			System.out.println(inf.toString());
 		}
 	}
 	
