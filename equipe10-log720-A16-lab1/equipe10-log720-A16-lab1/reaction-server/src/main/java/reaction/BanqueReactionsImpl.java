@@ -1,15 +1,15 @@
+package reaction;
+import java.io.Serializable;
+
 import org.omg.PortableServer.POA;
 
 import ca.etsmtl.log720.lab1.BanqueReactionsPOA;
-import ca.etsmtl.log720.lab1.CollectionDossierHelper;
-import ca.etsmtl.log720.lab1.CollectionInfractionHelper;
 import ca.etsmtl.log720.lab1.CollectionReaction;
 import ca.etsmtl.log720.lab1.CollectionReactionHelper;
 import ca.etsmtl.log720.lab1.Dossier;
-import ca.etsmtl.log720.lab1.DossierHelper;
 import ca.etsmtl.log720.lab1.Reaction;
 
-public class BanqueReactionsImpl extends BanqueReactionsPOA{
+public class BanqueReactionsImpl extends BanqueReactionsPOA implements Serializable{
 	
 	CollectionReactionImpl _collectionReaction;
 

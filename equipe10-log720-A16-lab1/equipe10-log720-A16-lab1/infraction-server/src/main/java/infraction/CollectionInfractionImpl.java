@@ -1,3 +1,4 @@
+package infraction;
 import java.util.ArrayList;
 
 import ca.etsmtl.log720.lab1.CollectionInfractionPOA;
