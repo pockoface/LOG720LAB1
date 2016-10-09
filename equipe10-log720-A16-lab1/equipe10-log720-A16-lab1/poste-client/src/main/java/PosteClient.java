@@ -44,7 +44,7 @@ public class PosteClient {
 			
 			System.out.println("Client du poste: ");
 			displayMainMenu();
-			System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1, 2, 3 ou 4)");
+			System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1, 2, 3 ou 4)");
 			mainMenu();	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,8 +52,8 @@ public class PosteClient {
 	}
 	
 	private static void displayMainMenu(){
-		System.out.println("1 - Ajouter un dossier à la banque de dossiers");
-		System.out.println("2 - Ajouter une infraction à la banque d'infractions");
+		System.out.println("1 - Ajouter un dossier a la banque de dossiers");
+		System.out.println("2 - Ajouter une infraction a la banque d'infractions");
 		System.out.println("3 - Visualiser la liste de l'ensemble des dossiers");
 		System.out.println("4 - Visualiser la liste de l'ensemble des infractions");
 	}
@@ -63,7 +63,7 @@ public class PosteClient {
 		selectedManager = integerSelector();
 		
 		while(selectedManager != 1 && selectedManager != 2 && selectedManager != 3 && selectedManager != 4){
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayMainMenu();
 			selectedManager = integerSelector();	
 		}
@@ -90,7 +90,7 @@ public class PosteClient {
 			//enteredValue.close();
 			break;	
 		default:
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayMainMenu();
 			selectedManager = integerSelector();
 			break;
@@ -102,7 +102,7 @@ public class PosteClient {
 		clearConsole();
 		System.out.println("Gestionnaire d'ajout de dossiers");
 		System.out.println("1 - Ajouter un dossier");
-		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1)");
+		System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1)");
 	}
 	
 	private static void addFilesMenu(){
@@ -110,7 +110,7 @@ public class PosteClient {
 		selectedIntegerValue = integerSelector();
 		
 		while(selectedIntegerValue != 1){
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayAddFilesMenu();
 			selectedIntegerValue = integerSelector();	
 		}
@@ -120,7 +120,7 @@ public class PosteClient {
 			addFileFunction();
 			break;
 		default:
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayAddFilesMenu();
 			selectedIntegerValue = integerSelector();
 			break;
@@ -135,7 +135,7 @@ public class PosteClient {
 		String carPlate = returnCarPlate();
 		String driverLicenseNumber = returnDriverLicense();
 		
-		System.out.println("Prénom = " + firstName + " ||| Nom de famille = " + lastName + " ||| Plaque de la voiture = " + carPlate + " ||| Numéro du permis = " + driverLicenseNumber);
+		System.out.println("Prenom = " + firstName + " ||| Nom de famille = " + lastName + " ||| Plaque de la voiture = " + carPlate + " ||| Numero du permis = " + driverLicenseNumber);
 		//dossier.ajouterDossier(lastName, firstName, carPlate, driverLicenseNumber);
 		printFilesList();
 	}
@@ -147,7 +147,7 @@ public class PosteClient {
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
 		while(selectedStringValue == ""){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnLastName();
 		}
 		
@@ -157,13 +157,13 @@ public class PosteClient {
 	}
 	
 	private static String returnFirstName(){
-		System.out.println("Veuillez entrer le prénom:");
+		System.out.println("Veuillez entrer le prenom:");
 		String firstName;
 		
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
 		while(selectedStringValue == ""){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnFirstName();
 		}
 		
@@ -179,7 +179,7 @@ public class PosteClient {
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
 		while(selectedStringValue == ""){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnCarPlate();
 		}
 		
@@ -189,13 +189,13 @@ public class PosteClient {
 	}
 	
 	private static String returnDriverLicense(){
-		System.out.println("Veuillez entrer le numéros du permis:");
+		System.out.println("Veuillez entrer le numeros du permis:");
 		String driverLicenseNumber;
 		
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
 		while(selectedStringValue == ""){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnDriverLicense();
 		}
 		
@@ -209,9 +209,9 @@ public class PosteClient {
 	private static void displayAddInfractionsMenu(){
 		clearConsole();
 		System.out.println("Gestionnaire d'ajout d'infractions");
-		System.out.println("1 - Ajouter une infraction à un dossier");
-		System.out.println("2 - Ajouter une ou des infractions à la liste des infractions");
-		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1 ou 2)");
+		System.out.println("1 - Ajouter une infraction a un dossier");
+		System.out.println("2 - Ajouter une ou des infractions a la liste des infractions");
+		System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1 ou 2)");
 	}
 	
 	private static void addInfractionsMenu(){
@@ -219,7 +219,7 @@ public class PosteClient {
 		selectedIntegerValue = integerSelector();
 		
 		while(selectedIntegerValue != 1 && selectedIntegerValue != 2 ){
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayAddInfractionsMenu();
 			selectedIntegerValue = integerSelector();	
 		}
@@ -232,7 +232,7 @@ public class PosteClient {
 			addInfractionsToInfractionsListFunction();
 			break;	
 		default:
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayAddInfractionsMenu();
 			selectedIntegerValue = integerSelector();
 			break;
@@ -245,19 +245,19 @@ public class PosteClient {
 		int idFile = returnFileID();
 		int idInfraction = returnInfractionID();
 		
-		System.out.println("Numéro d'identification du dossier = " + idFile + " ||| Numéro d'identification de l'infraction = " + idInfraction);
+		System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de l'infraction = " + idInfraction);
 		//dossier.ajouterInfractionAuDossier(idFile, idInfraction);
 		printInfractionList();
 	}
 	
 	private static int returnFileID(){
-		System.out.println("Veuillez entrer le numéro d'identification du dossier:");
+		System.out.println("Veuillez entrer le numero d'identification du dossier:");
 		int idFile;
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
 		while(selectedIntegerValue == 0){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnFileID();
 		}
 		
@@ -267,13 +267,13 @@ public class PosteClient {
 	}
 	
 	private static int returnInfractionID(){
-		System.out.println("Veuillez entrer le numéro d'identification de l'infraction :");
+		System.out.println("Veuillez entrer le numero d'identification de l'infraction :");
 		int idInfraction;
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
 		while(selectedIntegerValue == 0){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnInfractionID();
 		}
 		
@@ -300,7 +300,7 @@ public class PosteClient {
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
 		while(selectedStringValue == ""){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnInfractionName();
 		}
 		
@@ -310,13 +310,13 @@ public class PosteClient {
 	}
 	
 	private static int returnInfractionGravity(){
-		System.out.println("Veuillez entrer la gravité de l'infraction:");
+		System.out.println("Veuillez entrer la gravite de l'infraction:");
 		int infractionGravity;
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
 		while(selectedIntegerValue == 0){
-			System.out.println("Entrée invalide!");
+			System.out.println("Entree invalide!");
 			returnInfractionGravity();
 		}
 		
@@ -331,7 +331,7 @@ public class PosteClient {
 		clearConsole();
 		System.out.println("Gestionnaire des dossiers");
 		System.out.println("1 - Liste des dossiers");
-		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1)");
+		System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1)");
 	}
 	
 	private static void displayListFilesMenu(){
@@ -339,7 +339,7 @@ public class PosteClient {
 		selectedIntegerValue = integerSelector();
 		
 		while(selectedIntegerValue != 1){
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayFilesMenu();
 			selectedIntegerValue = integerSelector();	
 		}
@@ -349,7 +349,7 @@ public class PosteClient {
 			listFilesFunction();
 			break;
 		default:
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayFilesMenu();
 			selectedIntegerValue = integerSelector();
 			break;
@@ -367,7 +367,7 @@ public class PosteClient {
 		clearConsole();
 		System.out.println("Gestionnaire des infractions");
 		System.out.println("1 - Liste des infractions");
-		System.out.println("Veuillez sélectionner un choix à l'aide d'un chiffre (1)");
+		System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1)");
 	}
 	
 	private static void displayListInfractionsMenu(){
@@ -375,7 +375,7 @@ public class PosteClient {
 		selectedIntegerValue = integerSelector();
 		
 		while(selectedIntegerValue != 1){
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayListInfractionsMenu();
 			selectedIntegerValue = integerSelector();	
 		}
@@ -385,7 +385,7 @@ public class PosteClient {
 			listInfractionsFunction();
 			break;
 		default:
-			System.out.println("Entrée invalide! Veuillez sélectionner l'une des options suivantes:");
+			System.out.println("Entree invalide! Veuillez selectionner l'une des options suivantes:");
 			displayListInfractionsMenu();
 			selectedIntegerValue = integerSelector();
 			break;
