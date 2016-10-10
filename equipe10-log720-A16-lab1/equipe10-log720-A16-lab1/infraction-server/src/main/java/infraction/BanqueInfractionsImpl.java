@@ -49,8 +49,6 @@ public class BanqueInfractionsImpl extends BanqueInfractionsPOA implements Seria
 
 	public CollectionInfraction trouverInfractionsParDossier(Dossier mydossier) {
 		try {
-			System.out.println("SADASDASDASDASDASDASDASDASDAS");
-
 			CollectionInfractionImpl infractions = new CollectionInfractionImpl();
 			for(Integer idInfraction: mydossier.getListeInfraction()) {
 				infractions.InfractionList().add(_collectionInfraction.InfractionList().get(idInfraction));

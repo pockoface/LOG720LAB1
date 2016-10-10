@@ -235,16 +235,14 @@ public class VehiculeClient {
 		System.out.println(d._toString());
 		System.out.println("====INFRACTION====");
 		CollectionInfraction inf = infraction.trouverInfractionsParDossier(d);
-		System.out.println("FUCKTOU " + inf.size());
-		/*for(int i = 0; i < inf.size(); i++) {
+		for(int i = 0; i < inf.size(); i++) {
 			System.out.println(inf.getInfraction(i)._toString());
-		}*/
+		}
 		System.out.println("====REACTION====");
 		CollectionReaction r = reaction.trouverReactionsParDossier(d);
-		System.out.println(r.size());
-		/*for(int i = 0; i < r.size(); i++) {
+		for(int i = 0; i < r.size(); i++) {
 			System.out.println(r.getReaction(i)._toString());
-		}*/
+		}
 	}
 	
 	private static String returnDriverLicense(){

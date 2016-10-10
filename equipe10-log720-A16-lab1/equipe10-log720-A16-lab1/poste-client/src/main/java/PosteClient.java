@@ -317,7 +317,6 @@ public class PosteClient {
 		
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
-		System.out.println("FUCK YOU " + selectedStringValue=="");
 		while(selectedStringValue == ""){
 			System.out.println("Entree invalide!");
 			returnInfractionName();
