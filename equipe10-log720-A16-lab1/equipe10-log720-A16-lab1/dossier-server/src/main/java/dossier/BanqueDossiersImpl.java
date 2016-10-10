@@ -21,10 +21,11 @@ public class BanqueDossiersImpl extends BanqueDossiersPOA implements Serializabl
 		_plaqueList = new Hashtable<String,String>();
 	}
 
-	public void ajouterDossier(String nom, String prenom, String permis, String noPlaque) throws NoPermisExisteDejaException {
-		if(_plaqueList.containsKey(noPlaque)){
+	public void ajouterDossier(String nom, String prenom, String permis, String noPlaque) throws NoPermisExisteDejaException{
+		if(_plaqueList.containsKey(permis)){
 			throw new NoPermisExisteDejaException();
 		}
+		_plaqueList.put(permis, permis);
 		_collectionDossierImpl.collectionDossier().add(new DossierImpl(_collectionDossierImpl.size(), 0, nom, prenom, permis, noPlaque));
 	}
 

@@ -12,6 +12,9 @@ import ca.etsmtl.log720.lab1.CollectionDossier;
 import ca.etsmtl.log720.lab1.CollectionInfraction;
 import ca.etsmtl.log720.lab1.Dossier;
 import ca.etsmtl.log720.lab1.Infraction;
+import ca.etsmtl.log720.lab1.InvalidIdException;
+import ca.etsmtl.log720.lab1.NiveauHorsBornesException;
+import ca.etsmtl.log720.lab1.NoPermisExisteDejaException;
 
 public class PosteClient {
 	
@@ -129,15 +132,19 @@ public class PosteClient {
 	
 	private static void addFileFunction(){
 		System.out.println("ADD FILE");
-		
-		String lastName = returnLastName();
-		String firstName = returnFirstName();
-		String carPlate = returnCarPlate();
-		String driverLicenseNumber = returnDriverLicense();
-		
-		System.out.println("Prenom = " + firstName + " ||| Nom de famille = " + lastName + " ||| Plaque de la voiture = " + carPlate + " ||| Numero du permis = " + driverLicenseNumber);
-		//dossier.ajouterDossier(lastName, firstName, carPlate, driverLicenseNumber);
-		printFilesList();
+		try {
+			String lastName = returnLastName();
+			String firstName = returnFirstName();
+			String carPlate = returnCarPlate();
+			String driverLicenseNumber = returnDriverLicense();
+			
+			System.out.println("Prenom = " + firstName + " ||| Nom de famille = " + lastName + " ||| Plaque de la voiture = " + carPlate + " ||| Numero du permis = " + driverLicenseNumber);
+			dossier.ajouterDossier(lastName, firstName, driverLicenseNumber, carPlate);
+			printFilesList();
+		} catch (NoPermisExisteDejaException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No Permis Existant");
+		}
 	}
 	
 	private static String returnLastName(){
@@ -210,7 +217,7 @@ public class PosteClient {
 		clearConsole();
 		System.out.println("Gestionnaire d'ajout d'infractions");
 		System.out.println("1 - Ajouter une infraction a un dossier");
-		System.out.println("2 - Ajouter une ou des infractions a la liste des infractions");
+		System.out.println("2 - Ajouter une infraction a la liste des infractions");
 		System.out.println("Veuillez selectionner un choix a l'aide d'un chiffre (1 ou 2)");
 	}
 	
@@ -240,14 +247,20 @@ public class PosteClient {
 	}
 	
 	private static void addInfractionToFileFunction(){
-		System.out.println("ADD INFRACTION TO FILE");
-		
-		int idFile = returnFileID();
-		int idInfraction = returnInfractionID();
-		
-		System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de l'infraction = " + idInfraction);
-		//dossier.ajouterInfractionAuDossier(idFile, idInfraction);
-		printInfractionList();
+		try {
+			System.out.println("ADD INFRACTION TO FILE");
+			
+			int idFile = returnFileID();
+			int idInfraction = returnInfractionID();
+			
+			System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de l'infraction = " + idInfraction);
+			
+			dossier.ajouterInfractionAuDossier(idFile, idInfraction);
+			printInfractionList();
+		} catch (InvalidIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static int returnFileID(){
@@ -256,7 +269,7 @@ public class PosteClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnFileID();
 		}
@@ -272,7 +285,7 @@ public class PosteClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnInfractionID();
 		}
@@ -289,7 +302,12 @@ public class PosteClient {
 		int infractionGravity = returnInfractionGravity();
 		
 		System.out.println("Nom de l'infraction = " + infractionName + " ||| Niveau de l'infraction = " + infractionGravity);
-		//infraction.ajouterInfraction(infractionName, infractionGravity);
+		try {
+			infraction.ajouterInfraction(infractionName, infractionGravity);
+		} catch (NiveauHorsBornesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		printInfractionList();
 	}
 	
@@ -299,6 +317,7 @@ public class PosteClient {
 		
 		selectedStringValue = "";
 		selectedStringValue = stringSelector();
+		System.out.println("FUCK YOU " + selectedStringValue=="");
 		while(selectedStringValue == ""){
 			System.out.println("Entree invalide!");
 			returnInfractionName();
@@ -315,7 +334,7 @@ public class PosteClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnInfractionGravity();
 		}
@@ -401,6 +420,7 @@ public class PosteClient {
 	private static int integerSelector(){
 		try{
 			int returnValue =Integer.parseInt(enteredValue.next());
+			enteredValue.nextLine();
 			return returnValue;
 		}catch(Exception e){
 			return 0;	
@@ -409,7 +429,7 @@ public class PosteClient {
 	
 	private static String stringSelector(){
 		try{
-			String returnValue = enteredValue.next().toString();
+			String returnValue = enteredValue.nextLine();
 			return returnValue;
 		}catch(Exception e){
 			return "";	
@@ -420,7 +440,7 @@ public class PosteClient {
 		CollectionDossier cdos = dossier.dossiers();
 		for(int i = 0; i < cdos.size(); i++){
 			Dossier dos = cdos.getDossier(i);
-			System.out.println(dos.toString());	
+			System.out.println(dos._toString());	
 		}
 	}
 	
@@ -428,7 +448,7 @@ public class PosteClient {
 		CollectionInfraction cinfra = infraction.infractions();
 		for(int i = 0; i < cinfra.size(); i++){
 			Infraction inf = cinfra.getInfraction(i);
-			System.out.println(inf.toString());
+			System.out.println(inf._toString());
 		}
 	}
 	

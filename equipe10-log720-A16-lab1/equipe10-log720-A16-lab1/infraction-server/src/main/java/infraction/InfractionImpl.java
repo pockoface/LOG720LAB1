@@ -17,7 +17,7 @@ public class InfractionImpl extends InfractionPOA implements Serializable{
 	}
 
 	public String _toString() {
-		return "infraction.id: " + _id + " infraction.niveau: " + _niveau + " infraction.description: " + _description;
+		return "infraction.id: " + _id + "\ninfraction.niveau: " + _niveau + "\ninfraction.description: " + _description;
 	}
 
 	public String description() {

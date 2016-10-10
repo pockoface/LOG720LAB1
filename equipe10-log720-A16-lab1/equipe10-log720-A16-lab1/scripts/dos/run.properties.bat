@@ -4,5 +4,5 @@ set MY_CLASSPATH=..\..\police-idl\target\classes;..\..\poste-client\target\class
 set SERVER_DOSSIER=dossier.Server
 set SERVER_INFRACTION=infraction.Server
 set SERVER_REACTION=reaction.Server
-set CLIENT_POSTE=
-set CLIENT_VEHICULE=
+set CLIENT_POSTE=PosteClient
+set CLIENT_VEHICULE=VehiculeClient

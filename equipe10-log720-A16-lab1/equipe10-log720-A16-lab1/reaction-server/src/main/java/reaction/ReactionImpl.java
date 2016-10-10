@@ -17,7 +17,7 @@ public class ReactionImpl extends ReactionPOA implements Serializable{
 	}
 	
 	public String _toString() {
-		return " id: " + _id + " niveau: " + _niveau + " description: " + _description;
+		return " id: " + _id + "\nniveau: " + _niveau + "\ndescription: " + _description;
 	}
 
 	public String description() {

@@ -15,6 +15,7 @@ import ca.etsmtl.log720.lab1.CollectionInfraction;
 import ca.etsmtl.log720.lab1.CollectionReaction;
 import ca.etsmtl.log720.lab1.Dossier;
 import ca.etsmtl.log720.lab1.Infraction;
+import ca.etsmtl.log720.lab1.InvalidIdException;
 import ca.etsmtl.log720.lab1.Reaction;
 
 public class VehiculeClient {
@@ -152,13 +153,13 @@ public class VehiculeClient {
 	
 	private static void listFilesByNameFunction(){
 		System.out.println("LIST FILES BY NAME AND LAST NAME");
-		
 		String lastName = returnLastName();
 		String firstName = returnFirstName();
-		
 		System.out.println("Prenom = " + firstName + " ||| Nom de famille = " + lastName);
-		//dossier.trouverDossiersParNom(lastName, firstName);
-		 printFilesList();
+		CollectionDossier d = dossier.trouverDossiersParNom(lastName, firstName);
+		for(int i = 0; i < d.size(); i++) {
+			System.out.println(d.getDossier(i)._toString());
+		}
 	}
 	
 	private static String returnLastName(){
@@ -199,8 +200,13 @@ public class VehiculeClient {
 		String carPlate = returnCarPlate();
 		
 		System.out.println("Plaque de la voiture = " + carPlate);
-		//dossier.trouverDossiersParPlaque(carPlate);
-		 printFilesList();
+		
+		CollectionDossier d = dossier.trouverDossiersParPlaque(carPlate);
+		for(int i = 0; i < d.size(); i++) {
+			System.out.println(d.getDossier(i)._toString());
+		}
+		 
+		
 	}
 	
 	private static String returnCarPlate(){
@@ -225,8 +231,20 @@ public class VehiculeClient {
 		String driverLicenseNumber = returnDriverLicense();
 		
 		System.out.println("Numero du permis = " + driverLicenseNumber);
-		//dossier.trouverDossierParPermis(driverLicenseNumber);
-		printFilesList();
+		Dossier d = dossier.trouverDossierParPermis(driverLicenseNumber);
+		System.out.println(d._toString());
+		System.out.println("====INFRACTION====");
+		CollectionInfraction inf = infraction.trouverInfractionsParDossier(d);
+		System.out.println("FUCKTOU " + inf.size());
+		/*for(int i = 0; i < inf.size(); i++) {
+			System.out.println(inf.getInfraction(i)._toString());
+		}*/
+		System.out.println("====REACTION====");
+		CollectionReaction r = reaction.trouverReactionsParDossier(d);
+		System.out.println(r.size());
+		/*for(int i = 0; i < r.size(); i++) {
+			System.out.println(r.getReaction(i)._toString());
+		}*/
 	}
 	
 	private static String returnDriverLicense(){
@@ -290,14 +308,21 @@ public class VehiculeClient {
 	}
 	
 	private static void addReactionToFileFunction(){
-		System.out.println("ADD A REACTION TO A FILE");
+		try {
+			System.out.println("ADD A REACTION TO A FILE");
 
-		int idFile = returnFileID();
-		int idReaction = returnReactionID();
+			int idFile = returnFileID();
+			int idReaction = returnReactionID();
 		
-		System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de la reaction = " + idReaction);
-		//dossier.ajouterReactionAuDossier(idFile, idReaction);
-		printReactionsList();
+			System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de la reaction = " + idReaction);
+		
+			dossier.ajouterReactionAuDossier(idFile, idReaction);
+			printReactionsList();
+
+		} catch (InvalidIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static int returnFileID(){
@@ -306,7 +331,7 @@ public class VehiculeClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnFileID();
 		}
@@ -322,7 +347,7 @@ public class VehiculeClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnReactionID();
 		}
@@ -339,7 +364,7 @@ public class VehiculeClient {
 		int reactionGravity = returnReactionGravity();
 		
 		System.out.println("Nom de reaction = " + reactionName + " ||| Gravite de la reaction = " + reactionGravity);
-		//reaction.ajouterReaction(reactionName, reactionGravity);
+		reaction.ajouterReaction(reactionName, reactionGravity);
 		printReactionsList();
 	}
 	
@@ -365,7 +390,7 @@ public class VehiculeClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnReactionGravity();
 		}
@@ -416,14 +441,20 @@ public class VehiculeClient {
 	}
 	
 	private static void addInfractionsToFileFunction(){
-		System.out.println("ADD INFRACTION TO A FILE");
+		try {
+			System.out.println("ADD INFRACTION TO A FILE");
 		
-		int idFile = returnFileID();
-		int idInfraction = returnInfractionID();
+			int idFile = returnFileID();
+			int idInfraction = returnInfractionID();
 		
-		System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de l'infraction = " + idInfraction);
-		//dossier.ajouterInfractionAuDossier(idFile, idInfraction);
-		printInfractionList();
+			System.out.println("Numero d'identification du dossier = " + idFile + " ||| Numero d'identification de l'infraction = " + idInfraction);
+		
+			dossier.ajouterInfractionAuDossier(idFile, idInfraction);
+			printInfractionList();
+		} catch (InvalidIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static int returnInfractionID(){
@@ -432,7 +463,7 @@ public class VehiculeClient {
 		
 		selectedIntegerValue = 0;
 		selectedIntegerValue = integerSelector();
-		while(selectedIntegerValue == 0){
+		while(selectedIntegerValue == Integer.MIN_VALUE){
 			System.out.println("Entree invalide!");
 			returnInfractionID();
 		}
@@ -464,7 +495,7 @@ public class VehiculeClient {
 		CollectionDossier cdos = dossier.dossiers();
 		for(int i = 0; i < cdos.size(); i++){
 			Dossier dos = cdos.getDossier(i);
-			System.out.println(dos.toString());	
+			System.out.println(dos._toString());	
 		}
 	}
 	
@@ -472,7 +503,7 @@ public class VehiculeClient {
 		CollectionReaction creact = reaction.reactions();
 		for(int i = 0; i < creact.size(); i++){
 			Reaction react = creact.getReaction(i);
-			System.out.println(react.toString());	
+			System.out.println(react._toString());	
 		}
 	}
 	
@@ -480,7 +511,7 @@ public class VehiculeClient {
 		CollectionInfraction cinfra = infraction.infractions();
 		for(int i = 0; i < cinfra.size(); i++){
 			Infraction inf = cinfra.getInfraction(i);
-			System.out.println(inf.toString());
+			System.out.println(inf._toString());
 		}
 	}
 	

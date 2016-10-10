@@ -49,13 +49,15 @@ public class BanqueInfractionsImpl extends BanqueInfractionsPOA implements Seria
 
 	public CollectionInfraction trouverInfractionsParDossier(Dossier mydossier) {
 		try {
+			System.out.println("SADASDASDASDASDASDASDASDASDAS");
+
 			CollectionInfractionImpl infractions = new CollectionInfractionImpl();
 			for(Integer idInfraction: mydossier.getListeInfraction()) {
 				infractions.InfractionList().add(_collectionInfraction.InfractionList().get(idInfraction));
 			}
 			POA rootpoa = Server._infractionPOA;
 			org.omg.CORBA.Object obj;
-
+			
 			obj = rootpoa
 					.servant_to_reference(infractions);
 			return CollectionInfractionHelper.narrow(obj);

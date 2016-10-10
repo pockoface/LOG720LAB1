@@ -29,10 +29,12 @@ public class DossierImpl extends DossierPOA implements Serializable{
 		this._prenom = _prenom;
 		this._noPermis = _noPermis;
 		this._noPlaque = _noPlaque;
+		_reactions = new ArrayList<Integer>();
+		_infractions = new ArrayList<Integer>();
 	}	
 	
 	public String _toString() {
-		return "id: " + _id + " niveau: " + _niveau + " nom: " + _nom + " prenom: " + _prenom + " noPermis: " + _noPermis + " noPlaque: " + _noPlaque;
+		return "id: " + _id + "\nniveau: " + _niveau + "\nnom: " + _nom + "\nprenom: " + _prenom + "\nnoPermis: " + _noPermis + "\nnoPlaque: " + _noPlaque;
 	}
 		
 	public void ajouterInfractionAListe(int idInfraction) {
@@ -44,8 +46,7 @@ public class DossierImpl extends DossierPOA implements Serializable{
 	private void evaluateFolderLevel() {
 		_niveau = Integer.MIN_VALUE;
 		try{
-			org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init();
-			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+			NamingContextExt nc = NamingContextExtHelper.narrow(Server.orb
 					.resolve_initial_references("NameService"));
 			NameComponent[] name = new NameComponent[] { new NameComponent(
 					"Infraction", "service") };

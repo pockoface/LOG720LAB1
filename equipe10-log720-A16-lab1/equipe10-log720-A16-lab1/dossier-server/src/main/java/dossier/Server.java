@@ -12,9 +12,10 @@ public class Server {
 	protected static org.omg.PortableServer.POA _DossierPOA;
 	private final static String FILE_NAME = "dossier.sab";
 	protected static org.omg.PortableServer.Servant servant;
+	public static org.omg.CORBA.ORB orb;
 
 	public static void main(String[] args) {
-		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(args, null);
+		orb = org.omg.CORBA.ORB.init(args, null);
 		try {
 			org.omg.CORBA.Object o;
 
