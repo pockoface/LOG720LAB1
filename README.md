@@ -1,4 +1,4 @@
-# ${1:LOG720 Lab 1}
+# LOG720 Lab 1
 Laboratoire 1 du cours de LOG720 realiser par l'equipe 10 Automne 2016.
 
 ## Installation
