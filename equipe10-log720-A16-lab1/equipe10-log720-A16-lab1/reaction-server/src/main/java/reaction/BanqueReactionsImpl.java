@@ -1,14 +1,15 @@
 package reaction;
+
 import java.io.Serializable;
-
 import org.omg.PortableServer.POA;
-
+import lombok.extern.slf4j.Slf4j;
 import ca.etsmtl.log720.lab1.BanqueReactionsPOA;
 import ca.etsmtl.log720.lab1.CollectionReaction;
 import ca.etsmtl.log720.lab1.CollectionReactionHelper;
 import ca.etsmtl.log720.lab1.Dossier;
 import ca.etsmtl.log720.lab1.Reaction;
 
+@Slf4j
 public class BanqueReactionsImpl extends BanqueReactionsPOA implements Serializable{
 	
 	CollectionReactionImpl _collectionReaction;
@@ -29,7 +30,7 @@ public class BanqueReactionsImpl extends BanqueReactionsPOA implements Serializa
 					.servant_to_reference(_collectionReaction);
 			return CollectionReactionHelper.narrow(obj);
 		} catch (Exception e) {
-			System.out.println("Erreur retour de l'objet CollectionReaction : " + e);
+			log.error("Erreur retour de l'objet CollectionReaction : " + e);
 			return null;
 		}
 	}
@@ -38,7 +39,7 @@ public class BanqueReactionsImpl extends BanqueReactionsPOA implements Serializa
 		try {
 			return reactions().getReaction(idReaction);
 		} catch (Exception e) {
-			System.out.println("Erreur reaction inexistant: " + idReaction);
+			log.error("Erreur reaction inexistant: " + idReaction);
 			return null;
 		}
 	}
@@ -56,7 +57,7 @@ public class BanqueReactionsImpl extends BanqueReactionsPOA implements Serializa
 					.servant_to_reference(reactions);
 			return CollectionReactionHelper.narrow(obj);
 		} catch (Exception e) {
-			System.out.println("Erreur retour de l'objet CollectionInfraction : " + e);
+			log.error("Erreur retour de l'objet CollectionInfraction : " + e);
 			return null;
 		} 
 	}
