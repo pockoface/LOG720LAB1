@@ -15,3 +15,5 @@ hs_err_pid*
 *.properties
 *.properties
 /equipe10-log720-A16-lab1/equipe10-log720-A16-lab1/infraction-server/target/maven-archiver/*.properties
+
+.idea*
