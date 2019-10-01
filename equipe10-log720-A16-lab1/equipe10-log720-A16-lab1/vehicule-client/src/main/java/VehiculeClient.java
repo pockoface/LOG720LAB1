@@ -450,8 +450,7 @@ public class VehiculeClient {
 			dossier.ajouterInfractionAuDossier(idFile, idInfraction);
 			printInfractionList();
 		} catch (InvalidIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Something bad happened: " + e.printStackTrace());			
 		}
 	}
 	
